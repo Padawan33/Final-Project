@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db'); // Import the DB connection
 const authRoutes = require('./routes/authRoutes'); // Import the auth routes
+const treeRoutes = require('./routes/treeRoutes'); // Import the tree routes
 
 
 // Load env vars
@@ -24,6 +25,7 @@ app.get('/api/test', (req, res) => {
 
 // Mount router
 app.use('/api/users', authRoutes);
+app.use('/api/trees', treeRoutes);
 
 const PORT = process.env.PORT || 5000;
 
