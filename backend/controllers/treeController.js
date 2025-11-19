@@ -14,11 +14,19 @@ const createTree = async (req, res) => {
       return res.status(400).json({ message: 'Please provide species and full location data' });
     }
 
+    // Generate Friendly ID
+    // Logic: Take first 3 letters of species + random 4 digits
+    // Example: Species "Grevillea" -> "GRE-8392"
+    const prefix = species.substring(0, 3).toUpperCase();
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const friendlyId = `${prefix}-${randomNum}`;
+
     const tree = new Tree({
+      user: req.user._id, // Attach the logged-in user's ID
+      friendlyId,         // Attach the generated ID
       species,
       location,
       plantingDate,
-      user: req.user._id, // Attach the logged-in user's ID
     });
 
     const createdTree = await tree.save();
@@ -65,6 +73,5 @@ const getTreeById = async (req, res) => {
     res.status(500).json({ message: `Server Error: ${error.message}` });
   }
 };
-
 
 module.exports = { createTree, getMyTrees, getTreeById };

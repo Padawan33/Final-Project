@@ -6,7 +6,12 @@ const treeSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User', // This creates a relationship with the User model
+      ref: 'User',
+    },
+    // Auto-generated human-readable ID (e.g., GRE-1024)
+    friendlyId: {
+      type: String,
+      unique: true,
     },
     species: {
       type: String,
@@ -16,7 +21,7 @@ const treeSchema = new mongoose.Schema(
       // Using GeoJSON Point format
       type: {
         type: String,
-        enum: ['Point'], // 'location.type' must be 'Point'
+        enum: ['Point'],
         required: true,
       },
       coordinates: {
@@ -44,13 +49,13 @@ const treeSchema = new mongoose.Schema(
           enum: ['Healthy', 'Stressed', 'Diseased', 'Unknown'],
           default: 'Unknown',
         },
-        report: { type: String }, // A brief report from the AI
+        report: { type: String },
         analyzedAt: { type: Date, default: Date.now },
       },
     ],
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 

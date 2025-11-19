@@ -5,6 +5,7 @@ const connectDB = require('./config/db'); // Import the DB connection
 const authRoutes = require('./routes/authRoutes'); // Import the auth routes
 const treeRoutes = require('./routes/treeRoutes'); // Import the tree routes
 const analysisRoutes = require('./routes/analysisRoutes');
+const publicRoutes = require('./routes/publicRoutes');
 
 
 // Load env vars
@@ -28,6 +29,7 @@ app.get('/api/test', (req, res) => {
 app.use('/api/users', authRoutes);
 app.use('/api/trees', treeRoutes);
 app.use('/api/analysis', analysisRoutes);
+app.use('/api/public', publicRoutes);
 
 const PORT = process.env.PORT || 5000;
 
